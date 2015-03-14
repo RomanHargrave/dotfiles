@@ -1,0 +1,220 @@
+set $mod Mod4
+
+font xft:Source Code Pro 10
+
+floating_modifier $mod
+
+bindsym $mod+Return exec i3-sensible-terminal
+
+bindsym $mod+Shift+q kill
+
+bindsym $mod+d exec "/home/roman/.local/opt/dmenu-4.5/bin/dmenu-xft_run -nb '#2b2b2b' -sb '#424D5F' -nf '#A9B7C6' -sf '#A9B7C6' -fn 'Source Code Pro 1-10'"
+
+#######
+# Fun #
+#######
+
+bindsym $mod+g exec ruby /home/roman/.local/opt/gyazo
+
+#########
+# Focus #
+#########
+
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+############
+# Movement #
+############
+
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
+
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+#####################
+# Window Management #
+#####################
+
+bindsym $mod+h split h
+bindsym $mod+v split v
+
+bindsym $mod+f fullscreen
+
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+
+bindsym $mod+minus move scratchpad
+bindsym $mod+Tab scratchpad show
+
+########################
+# Container Management #
+########################
+
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+bindsym $mod+a focus parent
+#bindsym $mod+d focus child
+
+########################
+# Workspace Management #
+########################
+
+workspace_layout tabbed
+
+workspace terminal output HDMI1
+
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+bindsym $mod+grave workspace terminal
+bindsum $mod+Shift+grave move container to workspace terminal
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+#################
+# i3 Management #
+#################
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+mode "resize" {
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+#######
+# Bar #
+#######
+
+bar {
+        status_command i3blocks -vvvvvvvvvv
+        position       top
+	verbose	       true
+}
+
+bindsym $mod+m bar hidden_state toggle
+bindsym $mod+n bar mode toggle
+
+hide_edge_borders both
+popup_during_fullscreen smart
+
+client.focused		#383838 #2b2b2b #A9B7C6 #7DA3AC
+client.focused_inactive #383838 #1F1F1F #A9B7C6 #7DA3AC
+client.unfocused	#383838 #1F1F1F #A9B7C6 #7DA3AC
+client.urgent		#383838 #2AA198 #A9B7C6 #ECA514
+
+# Fucking randr
+exec_always /home/roman/.local/opt/unfuckscreens.sh
+
+exec_always nitrogen --restore
+exec xfce4-power-manager
+exec nm-applet
+exec_always bprof -r
+exec trayfreq
+exec_always xmodmap /home/roman/.Xmodmap
+exec gtk-redshift -m randr
+exec guake
+exec qtox
+
+# Start LinConnect server for notifications from phone
+#exec python /home/roman/.local/opt/linconnect/LinConnectServer/main/linconnect_server.py
+
+#exec bash .local/src/ums-3.6.2/UMS.sh
+exec fish .local/bin/tunnels_setup.fish
+
+#exec compton --config ~/.config/compton
+
+exec conky
+
+# Guake
+for_window [class="Guake"] hide_edge_borders both
+for_window [class="Guake"] floating enable
+for_window [class="Guake"] border none
+
+# Supercollider
+
+for_window [class="SuperCollider" title="function plot"] floating enable
+for_window [class="SuperCollider" title="Stethoscope"] floating enable
+
+# Notifications
+for_window [class="xfce4-notifyd"] hide_edge_borders both
+for_window [class="xfce4-notifyd"] floating enable
+for_window [class="xfce4-notifyd"] border none
+
+# Other windows that should float
+for_window [class="Gcolor2"] floating enable
+
+for_window [title="###overrideRedirect###"] hide_edge_borders both
+for_window [title="###overrideRedirect###"] border none
+for_window [title="Tomighty"] floating enable
+for_window [title="Tomighty"] border none
+for_window [title="Tomighty"] hide_edge_borders both
+
+for_window [class="Vidalia"] floating enable
+
+for_window [class="TeamViewer.exe"] floating enable
+
+for_window [class="(?i)conky"] floating enable border none
+
+# Terminal workspace
+for_window [title="Terminal_FullScreen"] fullscreen
+assign [title="Terminal_FullScreen"] → terminal
+exec "terminator -T Terminal_FullScreen -p fullscreen"
+
+exec dunst
+
+# class	       border  bg      text
+#client.focused #dddddd #dddddd #000000 #cccccc
