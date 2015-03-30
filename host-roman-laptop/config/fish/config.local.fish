@@ -5,6 +5,8 @@
 ####################################
 
 plugadd pathogen
+plugadd sprunge
+plugadd rvm
 
 ####################
 # Pathogen Manager #
@@ -14,9 +16,10 @@ set -gx PATHOGEN_BUNDLES $HOME/.nvim/bundle
 set -gx PATHOGEN_BUNDLES_DISABLED $PATHOGEN_BUNDLES.available
 
 # Login-only
-if status -l; and functions -q padd
+if functions -q padd
 	
 	set -gx PKG_CONFIG_PATH $PKG_CONFIG_PATH $LFIX/lib/pkgconfig
+	ldadd $LFIX/lib
 
 	# opt {{{ 
 
@@ -30,7 +33,7 @@ if status -l; and functions -q padd
 	# Java SDK #
 	############
 	
-	set -gx JDK_HOME	$LFIX/opt/java/jdk/oracle/8u20
+	set -gx JDK_HOME	$LFIX/opt/java/jdk/oracle/8u40
 	set -gx JAVA_HOME	$JDK_HOME
 
 	padd $JAVA_HOME/bin
@@ -119,7 +122,7 @@ if status -l; and functions -q padd
 	# Node.JS #
 	###########
 	
-	set -gx $NODE_HOME	$LFIX/opt/nodejs
+	set -gx NODE_HOME	$LFIX/opt/nodejs
 
 	padd $NODE_HOME/bin
 	padd $NODE_HOME/bin/node_modules/bower/node_modules/.bin	# wut
