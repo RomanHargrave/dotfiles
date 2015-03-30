@@ -1,0 +1,3 @@
+[submodule "config/fish/getopts"]
+	path = config/fish/getopts
+	url = https://github.com/bucaran/getopts
