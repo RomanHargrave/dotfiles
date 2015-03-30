@@ -3,13 +3,14 @@
 function padd
 	for spec in $argv
 		if not contains $spec $PATH
-			set -gx PATH $PATH $spec
+			set -gx PATH $spec $PATH
 		end
 	end
 end
 
 function ldadd
-	for spec in $LD_LIBRARY_PATH
+	set -lx IFS :
+	for spec in $argv
 		if not contains $spec $LD_LIBRARY_PATH
 			set -gx LD_LIBRARY_PATH $LD_LIBRARY_PATH $spec
 		end
@@ -62,8 +63,8 @@ ldadd /usr/local/lib
 # Local Software #
 ##################
 
-if status -l # {{{
-    
+begin # {{{
+
 	#############
     # Local Bin #
     #############
@@ -78,7 +79,7 @@ if status -l # {{{
 	
 	if test -d $LFIX/opt
 		
-		for folder in (ls -d $LFIX/opt/*/bin)
+		for folder in (ls -d $LFIX/opt/*/{bin,usr/{bin,local/bin}})
 			padd (realpath $folder)
 		end
 
@@ -130,19 +131,16 @@ if begin; [ "x$FISH_OMF" != "x" ]; and test -d $FISH_OMF; and status -i; end # {
 
 	set fish_theme agnoster
 
-	plugadd git\
-			dpaste\
+	plugadd dpaste\
+			sprunge\
 			xdg\
 			better-alias\
 			gi\
 			mc\
 			replace\
-			tab\
 			tmux\
 			tiny\
-			extract\
-			theme\
-			rvm
+			extract
 
 	set dpaste_site 'sprunge.us'
 	
