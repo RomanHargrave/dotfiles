@@ -7,6 +7,11 @@
 plugadd pathogen
 plugadd sprunge
 plugadd rvm
+plugadd require
+
+if not status -i
+    source $fish_custom/plugins/require/require.load
+end
 
 ####################
 # Pathogen Manager #
