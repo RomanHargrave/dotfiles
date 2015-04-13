@@ -18,22 +18,44 @@
     palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
     background_image = /home/roman/.local/share/backgrounds/termnoise-more.png
     background_darkness = 0.9
+    urgent_bell = True
     background_type = transparent
     use_system_font = False
     cursor_color = "#a9b7c6"
     foreground_color = "#a9b7c6"
-    font = Source Code Pro for Powerline 10
-    background_color = "#111111"
-  [[fullscreen]]
-    scrollbar_position = hidden
+    scroll_on_output = False
+    show_titlebar = False
+    font = M+ 1m for Powerline 11
+    background_color = "#141414"
+  [[faggot]]
     palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
+    alternate_screen_scroll = False
     background_image = None
-    background_darkness = 0.66
+    background_darkness = 0.82
     background_type = transparent
     use_system_font = False
     foreground_color = "#839496"
-    font = Source Code Pro for Powerline 10
+    scroll_on_output = False
+    icon_bell = False
+    show_titlebar = False
+    cursor_shape = ibeam
+    scroll_on_keystroke = False
+    font = PragmataPro for Powerline 11
     background_color = "#002b36"
+  [[vim]]
+    scrollbar_position = hidden
+    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
+    background_image = None
+    background_darkness = 0.91
+    background_type = transparent
+    use_system_font = False
+    cursor_color = "#a9b7c6"
+    foreground_color = "#a9b7c6"
+    use_custom_command = True
+    show_titlebar = False
+    custom_command = vim
+    font = M+ 1m for Powerline 11
+    background_color = "#141414"
 [layouts]
   [[default]]
     [[[child1]]]
