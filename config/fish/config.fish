@@ -25,6 +25,14 @@ function --no-scope-shadowing  plugadd
 	end
 end
 
+function mark_exportable
+    for name in $argv
+        if not contains $name $fish_export_colons
+            set fish_export_colons $fish_export_colons $name
+        end
+    end
+end
+
 function warn
 	if isatty
 		echo $argv
@@ -56,12 +64,19 @@ set -g FISH_CPATH	(status -f)
 set -g FISH_HOME	(dirname $FISH_CPATH)
 set -g FISH_LCONF	$FISH_HOME/config.local.fish
 set -g FISH_OMF		$HOME/.oh-my-fish
+set -gx fish_path   $FISH_OMF
+set -gx fish_custom $FISH_HOME/extensions 
+
+mark_exportable LD_LIBRARY_PATH CLASSPATH
 
 ldadd /usr/local/lib
 
 ##################
 # Local Software #
 ##################
+
+set -gx	EDITOR	"vim"
+set -gx BROWSER	"firefox"
 
 begin # {{{
 
@@ -123,8 +138,6 @@ padd /sbin /usr/sbin /usr/local/sbin
 
 if begin; [ "x$FISH_OMF" != "x" ]; and test -d $FISH_OMF; and status -i; end # {{{
 	
-	set fish_path $FISH_OMF
-
 	##########
 	# Config #
 	##########
@@ -142,12 +155,16 @@ if begin; [ "x$FISH_OMF" != "x" ]; and test -d $FISH_OMF; and status -i; end # {
 			tiny\
 			extract
 
-	set dpaste_site 'sprunge.us'
-	
-	source $fish_path/oh-my-fish.fish
+	# set dpaste_site 'sprunge.us'
+    
+	source $FISH_OMF/oh-my-fish.fish
 
-	set -eg fish_plugins
 end # }}}
 
 # Delete helpers
 functions -e padd ldadd plugadd
+
+# Exported helpers
+function require_logging
+	require logging
+end
